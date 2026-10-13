@@ -1,0 +1,62 @@
+/* Clear, deliberate interim states for views whose functionality arrives in later stages. */
+.view-placeholder { display: grid; min-height: 330px; place-items: center; padding: 30px; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--surface); text-align: center; box-shadow: var(--shadow-sm); }
+.view-placeholder-inner { display: flex; flex-direction: column; align-items: center; max-width: 440px; }
+.view-placeholder-icon { display: grid; width: 58px; height: 58px; place-items: center; border: 1px solid var(--border); border-radius: 17px; background: var(--surface-muted); color: var(--accent); }
+.view-placeholder-icon .icon { width: 25px; height: 25px; }
+.view-placeholder h2 { margin: 18px 0 7px; font-size: 20px; letter-spacing: -.5px; }
+.view-placeholder p { margin: 0; color: var(--text-secondary); font-size: 13px; line-height: 1.7; }
+.stage-label { display: inline-flex; align-items: center; gap: 6px; margin-top: 17px; padding: 6px 9px; border: 1px solid var(--border); border-radius: 999px; background: var(--surface-muted); color: var(--text-secondary); font-size: 10px; font-weight: 700; }
+.stage-label::before { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); content: ""; }
+.search-feedback { margin: -10px 0 18px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 9px; background: var(--surface); color: var(--text-secondary); font-size: 12px; }
+
+
+/* Stage 3: task creation and management */
+.tasks-page { display: grid; gap: 18px; }
+.tasks-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--surface); }
+.tasks-intro h2 { margin: 0; font-size: 16px; letter-spacing: -.3px; }
+.tasks-intro p { margin: 5px 0 0; color: var(--text-tertiary); font-size: 11px; }
+.task-list { display: grid; gap: 11px; }
+.task-card { display: flex; align-items: flex-start; gap: 13px; padding: 17px; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--surface); box-shadow: var(--shadow-sm); }
+.task-complete { display: grid; flex: 0 0 auto; width: 22px; height: 22px; place-items: center; margin-top: 1px; border: 1.5px solid var(--border-strong); border-radius: 7px; background: var(--surface); color: white; font-weight: 800; }
+.task-complete:hover { border-color: var(--accent); }
+.task-complete.is-checked { border-color: var(--green); background: var(--green); }
+.task-card-body { flex: 1; min-width: 0; }
+.task-card-body h3 { margin: 0; overflow-wrap: anywhere; font-size: 13px; font-weight: 750; }
+.task-description { margin: 7px 0 0; color: var(--text-secondary); font-size: 12px; line-height: 1.6; white-space: pre-wrap; overflow-wrap: anywhere; }
+.task-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
+.task-chip { display: inline-flex; align-items: center; padding: 5px 8px; border-radius: 7px; background: var(--surface-muted); color: var(--text-secondary); font-size: 10px; font-weight: 700; }
+.status-todo { background: var(--surface-muted); }.status-in-progress { background: var(--purple-soft); color: var(--purple); }.status-completed { background: var(--green-soft); color: var(--green); }
+.priority-high { background: var(--red-soft); color: var(--red); }.priority-medium { background: var(--amber-soft); color: var(--amber); }.priority-low { background: var(--blue-soft); color: var(--blue); }
+.task-due { color: var(--text-tertiary); font-size: 10px; }.task-due.is-overdue { color: var(--red); font-weight: 750; }
+.task-card-actions { display: flex; flex: 0 0 auto; gap: 6px; }
+.button-small { min-height: 30px; padding: 0 10px; font-size: 10px; }
+.danger-button { color: var(--red); }
+.tasks-empty { display: flex; flex-direction: column; align-items: center; padding: 54px 20px; border: 1px dashed var(--border-strong); border-radius: var(--radius-md); background: var(--surface); text-align: center; }
+.tasks-empty-mark { display: grid; width: 52px; height: 52px; place-items: center; border-radius: 16px; background: var(--accent-soft); color: var(--accent); font-size: 24px; }
+.tasks-empty h3 { margin: 15px 0 5px; font-size: 15px; }.tasks-empty p { max-width: 330px; margin: 0 0 17px; color: var(--text-secondary); font-size: 12px; line-height: 1.6; }
+.task-dialog { width: min(560px, calc(100vw - 28px)); max-height: min(90vh, 760px); padding: 0; border: 1px solid var(--border); border-radius: 16px; background: var(--surface); color: var(--text); box-shadow: var(--shadow-md); }
+.task-dialog::backdrop { background: rgb(7 13 26 / 62%); backdrop-filter: blur(3px); }
+.task-form { display: grid; gap: 16px; padding: 24px; }
+.task-dialog-heading { position: relative; padding-right: 40px; }.task-dialog-heading h2 { margin: 0; font-size: 19px; }.task-dialog-heading p { margin: 5px 0 0; color: var(--text-secondary); font-size: 12px; }
+.task-dialog-close { position: absolute; top: -7px; right: -7px; font-size: 25px; }
+.task-field { display: grid; gap: 7px; color: var(--text-secondary); font-size: 11px; font-weight: 700; }
+.task-field input, .task-field textarea, .task-field select { width: 100%; min-width: 0; padding: 10px 11px; border: 1px solid var(--border-strong); border-radius: 9px; outline: none; background: var(--surface-muted); color: var(--text); font: inherit; font-weight: 450; }
+.task-field input:focus, .task-field textarea:focus, .task-field select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 14%, transparent); }
+.task-field textarea { resize: vertical; line-height: 1.55; }.task-form-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 11px; }
+.task-form-error { margin: 0; color: var(--red); font-size: 12px; }.task-form-actions { display: flex; justify-content: flex-end; gap: 8px; padding-top: 4px; }
+@media (max-width: 600px) { .tasks-toolbar { align-items: flex-start; padding: 15px; }.task-card { gap: 9px; padding: 13px; flex-wrap: wrap; }.task-card-body { min-width: calc(100% - 40px); }.task-card-actions { margin-left: 31px; }.task-form { padding: 18px; }.task-form-grid { grid-template-columns: 1fr; gap: 13px; } }
+
+.task-confirm-dialog { width: min(420px, calc(100vw - 28px)); }
+.task-confirm-name { margin: 0; padding: 12px; overflow-wrap: anywhere; border: 1px solid var(--border); border-radius: 9px; background: var(--surface-muted); font-weight: 650; }
+.danger-confirm-button { background: var(--red); color: white; }
+.danger-confirm-button:hover { filter: brightness(.95); }
+
+/* Stage 4: task list tools */
+.task-filters{display:grid;grid-template-columns:minmax(180px,2fr) repeat(3,minmax(130px,1fr)) auto;gap:12px;align-items:end;margin:18px 0 12px;padding:16px;border:1px solid var(--border-color);border-radius:14px;background:var(--surface-color)}
+.task-filter-field{display:flex;flex-direction:column;gap:7px;font-size:.78rem;font-weight:650;color:var(--text-secondary)}
+.task-filter-input,.task-filter-select{width:100%;min-width:0;min-height:40px;padding:9px 11px;border:1px solid var(--border-color);border-radius:9px;background:var(--background-color);color:var(--text-primary);font:inherit;font-size:.88rem}
+.task-filter-input:focus,.task-filter-select:focus{outline:2px solid var(--accent-color);outline-offset:1px}
+.task-results-count{margin:12px 2px;color:var(--text-secondary);font-size:.82rem}
+.tasks-filter-empty{min-height:150px;padding:28px}
+@media(max-width:1000px){.task-filters{grid-template-columns:repeat(2,minmax(0,1fr))}.task-filter-search{grid-column:1/-1}}
+@media(max-width:560px){.task-filters{grid-template-columns:1fr}.task-filter-search{grid-column:auto}.task-filters>.button{width:100%}}

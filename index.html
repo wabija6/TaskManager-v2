@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="TaskManager v2 — a local productivity workspace.">
+  <title>TaskManager v2</title>
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/variables.css">
+  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <link rel="stylesheet" href="./css/views.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+  <link rel="stylesheet" href="./css/auth.css">
+  <script type="module" src="./js/app.js"></script>
+</head>
+<body>
+  <main class="auth-page" id="auth-page" aria-labelledby="auth-title">
+    <section class="auth-card">
+      <a class="auth-brand" href="#" aria-label="TaskManager v2 home">
+        <span class="brand-mark" aria-hidden="true"><span class="icon icon-check"></span></span>
+        <span>TaskManager<span class="brand-version">v2</span></span>
+      </a>
+      <p class="auth-eyebrow">YOUR PERSONAL WORKSPACE</p>
+      <h1 id="auth-title">Welcome back</h1>
+      <p class="auth-intro" id="auth-intro">Sign in to continue to your local workspace.</p>
+      <div class="auth-warning" role="note">
+        <strong>Local demo account</strong>
+        <span>Your account stays in this browser. This is not production-grade authentication and does not protect data from someone with access to your browser or device.</span>
+      </div>
+      <p class="auth-feedback" id="auth-feedback" role="alert" hidden></p>
+
+      <form id="login-form" class="auth-form" novalidate>
+        <label for="login-username">Username</label>
+        <input id="login-username" name="username" type="text" minlength="3" maxlength="24" autocomplete="username" required>
+        <label for="login-password">Password</label>
+        <input id="login-password" name="password" type="password" autocomplete="current-password" required>
+        <button class="button button-primary auth-submit" type="submit" id="login-submit">Sign in</button>
+        <p class="auth-switch-copy">New here? <button class="auth-link" type="button" data-auth-switch="register">Create an account</button></p>
+      </form>
+
+      <form id="register-form" class="auth-form" novalidate hidden>
+        <label for="register-name">Display name</label>
+        <input id="register-name" name="displayName" type="text" minlength="2" maxlength="50" autocomplete="name" required>
+        <label for="register-username">Username</label>
+        <input id="register-username" name="username" type="text" minlength="3" maxlength="24" autocomplete="username" aria-describedby="username-help" required>
+        <small class="field-help" id="username-help">3–24 characters: letters, numbers, underscores, or hyphens.</small>
+        <label for="register-password">Password</label>
+        <input id="register-password" name="password" type="password" minlength="8" autocomplete="new-password" aria-describedby="password-help" required>
+        <small class="field-help" id="password-help">At least 8 characters. A password hash is stored, not the original password.</small>
+        <label for="register-confirm">Confirm password</label>
+        <input id="register-confirm" name="confirmPassword" type="password" minlength="8" autocomplete="new-password" required>
+        <button class="button button-primary auth-submit" type="submit" id="register-submit">Create account</button>
+        <p class="auth-switch-copy">Already registered? <button class="auth-link" type="button" data-auth-switch="login">Sign in</button></p>
+      </form>
+      <p class="auth-storage-note"><span class="icon icon-lock" aria-hidden="true"></span> Saved locally in this browser using IndexedDB.</p>
+    </section>
+  </main>
+  <div class="app-shell" id="app-shell" hidden>
+    <div class="mobile-scrim" id="mobile-scrim" aria-hidden="true"></div>
+    <aside class="sidebar" id="sidebar" aria-label="Main sidebar">
+      <a class="brand" href="#dashboard" aria-label="TaskManager home" data-view-link="dashboard">
+        <span class="brand-mark" aria-hidden="true"><span class="icon icon-check"></span></span>
+        <span class="brand-name">TaskManager<span class="brand-version">v2</span></span>
+      </a>
+
+      <div class="sidebar-label">WORKSPACE</div>
+      <nav class="main-nav" aria-label="Main navigation">
+        <button class="nav-item is-active" type="button" data-view="dashboard" aria-current="page">
+          <span class="icon icon-grid" aria-hidden="true"></span><span>Dashboard</span>
+        </button>
+        <button class="nav-item" type="button" data-view="tasks">
+          <span class="icon icon-list" aria-hidden="true"></span><span>Tasks</span>
+        </button>
+        <button class="nav-item" type="button" data-view="calendar">
+          <span class="icon icon-calendar" aria-hidden="true"></span><span>Calendar</span>
+        </button>
+        <button class="nav-item" type="button" data-view="kanban">
+          <span class="icon icon-columns" aria-hidden="true"></span><span>Kanban</span>
+        </button>
+        <button class="nav-item" type="button" data-view="settings">
+          <span class="icon icon-settings" aria-hidden="true"></span><span>Settings</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-spacer"></div>
+      <section class="theme-section" aria-labelledby="theme-label">
+        <div class="sidebar-label" id="theme-label">APPEARANCE</div>
+        <div class="theme-switcher" role="group" aria-label="Color theme">
+          <button class="theme-option is-selected" type="button" data-theme="light" aria-pressed="true">Light</button>
+          <button class="theme-option" type="button" data-theme="dark" aria-pressed="false">Dark</button>
+          <button class="theme-option" type="button" data-theme="auto" aria-pressed="false">Auto</button>
+        </div>
+        <p class="theme-note" id="theme-note">Light appearance selected</p>
+      </section>
+
+      <div class="sidebar-divider"></div>
+      <div class="profile-card">
+        <div class="avatar" id="profile-avatar" aria-hidden="true">P</div>
+        <div class="profile-copy">
+          <span class="profile-name" id="profile-name">Personal workspace</span>
+          <span class="profile-role">Personal workspace</span>
+        </div>
+        <button class="icon-button logout-button" id="logout-button" type="button" aria-label="Sign out" title="Sign out of this local account">
+          <span class="icon icon-logout" aria-hidden="true"></span>
+        </button>
+      </div>
+    </aside>
+
+    <div class="main-column">
+      <header class="topbar">
+        <button class="icon-button mobile-menu-button" id="mobile-menu-button" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="sidebar">
+          <span class="icon icon-menu" aria-hidden="true"></span>
+        </button>
+        <div class="topbar-search">
+          <span class="icon icon-search" aria-hidden="true"></span>
+          <label class="sr-only" for="global-search">Search tasks</label>
+          <input id="global-search" type="search" placeholder="Search tasks..." autocomplete="off">
+          <kbd class="search-shortcut" aria-hidden="true">/</kbd>
+        </div>
+        <div class="topbar-actions">
+          <button class="icon-button" id="notifications-button" type="button" aria-label="Notifications">
+            <span class="icon icon-bell" aria-hidden="true"></span><span class="notification-dot" aria-hidden="true"></span>
+          </button>
+          <button class="icon-button" id="messages-button" type="button" aria-label="Messages">
+            <span class="icon icon-message" aria-hidden="true"></span>
+          </button>
+          <button class="button button-primary new-task-button" id="new-task-button" type="button">
+            <span class="icon icon-plus" aria-hidden="true"></span><span>New Task</span>
+          </button>
+        </div>
+      </header>
+
+      <main class="main-content" id="main-content" tabindex="-1">
+        <div class="page-heading">
+          <div>
+            <p class="eyebrow" id="page-eyebrow">YOUR WORKSPACE</p>
+            <h1 id="page-title">Good morning, Demo User <span class="greeting-wave" aria-hidden="true">👋</span></h1>
+            <p class="page-subtitle" id="page-subtitle">Here's your task overview for today.</p>
+          </div>
+          <div class="date-pill"><span class="icon icon-calendar" aria-hidden="true"></span><span id="current-date">Today</span></div>
+        </div>
+
+        <div id="view-content" class="view-content" aria-live="polite">
+          <section class="stats-grid" aria-label="Task overview">
+            <article class="stat-card">
+              <div class="stat-top"><span class="stat-label">Total tasks</span><span class="stat-icon stat-icon-blue"><span class="icon icon-list" aria-hidden="true"></span></span></div>
+              <div class="stat-value">—</div><div class="stat-foot"><span class="trend-neutral">—</span><span>Awaiting task data</span></div>
+            </article>
+            <article class="stat-card">
+              <div class="stat-top"><span class="stat-label">Completed</span><span class="stat-icon stat-icon-green"><span class="icon icon-check-circle" aria-hidden="true"></span></span></div>
+              <div class="stat-value">—</div><div class="stat-foot"><span class="trend-neutral">—</span><span>Awaiting task data</span></div>
+            </article>
+            <article class="stat-card">
+              <div class="stat-top"><span class="stat-label">In progress</span><span class="stat-icon stat-icon-purple"><span class="icon icon-activity" aria-hidden="true"></span></span></div>
+              <div class="stat-value">—</div><div class="stat-foot"><span class="trend-neutral">—</span><span>Awaiting task data</span></div>
+            </article>
+            <article class="stat-card">
+              <div class="stat-top"><span class="stat-label">Pending</span><span class="stat-icon stat-icon-amber"><span class="icon icon-clock" aria-hidden="true"></span></span></div>
+              <div class="stat-value">—</div><div class="stat-foot"><span class="trend-neutral">—</span><span>Awaiting task data</span></div>
+            </article>
+            <article class="stat-card">
+              <div class="stat-top"><span class="stat-label">Overdue</span><span class="stat-icon stat-icon-red"><span class="icon icon-alert" aria-hidden="true"></span></span></div>
+              <div class="stat-value">—</div><div class="stat-foot"><span class="trend-neutral">—</span><span>Awaiting task data</span></div>
+            </article>
+          </section>
+
+          <section class="dashboard-grid" aria-label="Progress and task lists">
+            <article class="panel progress-panel">
+              <div class="panel-heading"><div><h2>Task completion</h2><p>Your overall progress</p></div><span class="icon icon-more" aria-hidden="true"></span></div>
+              <div class="progress-content">
+                <div class="progress-ring" role="img" aria-label="0 percent of tasks completed">
+                  <svg viewBox="0 0 160 160" aria-hidden="true">
+                    <circle class="ring-track" cx="80" cy="80" r="66"></circle>
+                    <circle class="ring-value" cx="80" cy="80" r="66"></circle>
+                  </svg>
+                  <div class="ring-center"><strong>—%</strong><span>Completed</span></div>
+                </div>
+                <p class="progress-caption">Task statistics will appear when task management is added.</p>
+              </div>
+            </article>
+            <article class="panel task-preview-panel">
+              <div class="panel-heading"><div><h2>Today's tasks</h2><p>Keep your day moving</p></div><button class="text-button" type="button" data-view="tasks">View tasks <span aria-hidden="true">→</span></button></div>
+              <div class="empty-state compact-empty">
+                <span class="empty-icon"><span class="icon icon-check-circle" aria-hidden="true"></span></span>
+                <h3>A clear start</h3>
+                <p>Your task list will show here once task creation is available.</p>
+                <button class="button button-secondary" type="button" id="empty-create-button">Explore the workspace</button>
+              </div>
+            </article>
+          </section>
+
+          <section class="lower-grid">
+            <article class="panel list-panel">
+              <div class="panel-heading"><div><h2>Upcoming deadlines</h2><p>What’s coming up next</p></div><span class="panel-heading-icon"><span class="icon icon-calendar" aria-hidden="true"></span></span></div>
+              <div class="empty-row"><span class="empty-row-dot"></span><span>No deadlines to display yet</span></div>
+            </article>
+            <article class="panel list-panel">
+              <div class="panel-heading"><div><h2>Recent tasks</h2><p>Your latest activity</p></div><span class="panel-heading-icon"><span class="icon icon-activity" aria-hidden="true"></span></span></div>
+              <div class="empty-row"><span class="empty-row-dot"></span><span>Recent activity will appear here</span></div>
+            </article>
+          </section>
+        </div>
+      </main>
+      <footer class="app-footer"><span>TaskManager <span class="footer-separator">/</span> Personal workspace</span><span>Stage 3 · Task management</span></footer>
+    </div>
+  </div>
+
+  <div class="toast-region" id="toast-region" aria-live="polite" aria-atomic="false"></div>
+  <div class="sr-only" id="announcer" aria-live="polite"></div>
+</body>
+</html>
